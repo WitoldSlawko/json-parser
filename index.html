@@ -1,0 +1,131 @@
+
+<!doctype html>
+<html>
+  <head>
+    <title>Node.js_Form_submit</title>
+    <style>
+      
+    </style>
+  </head>
+  <body>
+    <h1>Node.js JSON reader</h1>
+    <div id="messages"></div>
+
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function(){
+        var socket = io();
+        var messages = document.getElementById('messages')
+        //var nest = false;
+        var push = '0px';
+        var length = 0;
+        var iter = 0;
+        socket.once('Message', function(resp){
+         
+          reader(resp)
+
+        });
+
+        function reader(resp) {
+
+          for (let i=0; i < Object.keys(resp).length; i++) {
+
+            var communicate = document.createElement('div')
+            var element = document.createElement('p');
+            element.style.display = 'inline-block';
+            var check = document.createElement('input');
+            check.checked = false;
+
+            check.addEventListener('change', function(){
+              //One for All
+              //var decide = 0;
+              if (this.parentElement.children.length > 2) {
+                for (var i=2; i < this.parentElement.children.length; i++){
+                  if (this.checked == true){
+                    this.parentElement.children[i].firstElementChild.checked = true;
+                  }
+                  else {
+                    this.parentElement.children[i].firstElementChild.checked = false;
+                  }
+                  if (this.parentElement.children[i].firstElementChild.checked == true){
+                    decide +=1
+                  }
+                }
+                /*
+                if (this.parentElement.children.length - 2 == decide) {
+                  this.checked = true;
+                  console.log(this)
+                }
+                else {
+                  this.checked = false;
+                }
+                */
+              }
+              
+              //All for One
+
+            })
+            
+            //check.style.display = 'inline-block';
+            check.setAttribute('type', 'checkbox')
+            //check.checked = 'true'
+            //check.blur()
+            communicate.style.paddingLeft = push;
+
+            communicate.appendChild(element);
+            communicate.insertBefore(check,element);
+
+            if (typeof resp[Object.keys(resp)[i]] == 'object') {
+              //length = 0;
+              //iter = 0;
+              length = Object.keys(resp[Object.keys(resp)[i]]).length;
+              //console.log(length);
+              push = '20px'
+              nest = true;
+              element.innerText += Object.keys(resp)[i];
+              
+              messages.appendChild(communicate);
+              reader(resp[Object.keys(resp)[i]])
+            }
+            else {
+
+              if (length != 0 && iter != length) {
+                iter++;
+              }
+              
+              element.innerText += Object.keys(resp)[i] + ' : ' + resp[Object.keys(resp)[i]]
+
+              if (iter !=0) {
+                messages.lastElementChild.appendChild(communicate)
+              }
+              else {
+                messages.appendChild(communicate);
+              }
+              //push = '0px';
+              //nest = false;
+              if (length !=0 && iter == length){
+                length = 0;
+                iter = 0;
+                push = '0px';
+              }
+            }
+          }
+          //messages.appendChild(communicate);
+        }
+/*
+        var checkboxes = document.querySelectorAll('input');
+        console.log(checkboxes.length)
+
+        for (var i=0; i < checkboxes.length; i++) {
+          checkboxes[i].addEventListener('change', function(){
+            console.log(this.nextElement.innerText);
+          })
+        }
+*/
+        })
+
+    </script>
+
+  </body>
+</html>

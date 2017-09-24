@@ -1,0 +1,94 @@
+* { 
+  white-space: pre; 
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: rgba(255, 255, 255, 0.64);
+  background-color: #121313;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+body {
+  background-color: #121313;
+}
+
+.container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container > * {
+  margin: 10px 0 10px 0;
+}
+
+h1 {
+  font-weight: bold;
+  font-size: 2.5rem;
+}
+
+.panel, .download {
+  display: flex;
+  width: 100%;
+}
+
+.panel {
+  max-width: 800px;
+}
+
+.download {
+  max-width: 400px;
+}
+
+.download > a, .panel > button {
+  margin-left: 10px;
+}
+
+h1, a, button, .parser, input {
+  font-weight: bold;
+}
+
+a, button {
+  font-size: 1rem;
+}
+
+input {
+  width: 100%;
+  text-align: center;
+}
+
+.parser {
+  width: 100%;
+  border: 2px solid rgba(255, 255, 255, 0.64);
+  min-height: 20px;
+  font-size: 1rem;
+  overflow: scroll;
+}
+
+@media (min-width: 801px) {
+  html {
+    font-size: 16px;
+  }
+}
+@media (max-width: 800px) {
+  html {
+    font-size: 14px;
+  }
+}
+@media (max-width: 600px) {
+  html {
+    font-size: 12px;
+  }
+}
+@media (max-width: 500px) {
+  html {
+    font-size: 10px;
+  }
+}
+@media (max-width: 400px) {
+  html {
+    font-size: 8px;
+  }
+
+}
